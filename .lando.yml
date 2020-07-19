@@ -1,0 +1,28 @@
+name: d9-test-env
+recipe: drupal9
+config:
+  webroot: web
+drush: path:/app/vendor/bin/drush
+tooling:
+  # Point composer to the right docroot.
+  composer:
+    service: appserver
+    cmd: composer --working-dir=/app/web
+  # Point drush to the right docroot.
+  drush:
+    service: appserver
+    cmd: drush --root=/app/web
+  run-tests:
+    service: appserver
+    description: Fires run-tests.sh, with many parameters already filled-in
+    cmd: php /app/web/core/scripts/run-tests.sh --color --verbose --keep-results --suppress-deprecations --concurrency "32" --php /usr/local/bin/php --sqlite "/tmp/test.sqlite" --dburl "mysql://drupal9:drupal9@database/drupal9"
+  phpunit:
+    service: appserver
+    description: Runs phpunit
+    cmd: /app/web/vendor/bin/phpunit -c /app/web/core/
+services:
+  appserver:
+    type: php
+    overrides:
+      environment:
+        SIMPLETEST_DB: "mysql://drupal9:drupal9@database/drupal9"
