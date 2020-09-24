@@ -26,3 +26,5 @@ services:
     overrides:
       environment:
         SIMPLETEST_DB: "mysql://drupal9:drupal9@database/drupal9"
+        # In-memory SQLite is faster; you may need this patch: https://www.drupal.org/files/issues/2020-05-20/2983452-51.patch
+        #SIMPLETEST_DB: "sqlite://localhost/:memory:"
