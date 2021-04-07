@@ -4,7 +4,9 @@
 
 if [[ "$1" = "--add-require-dev" ]];
 then
-  lando composer require $(cat web/modules/contrib/$2/composer.json | jq -r '.["require-dev"] | to_entries | map(.key + ":" + .value) | join(" ")');
+  # support the composer package syntax (drupal/the_module:version), as well as just the module name.
+  MODULE_NAME=$(echo $2 | cut -d'/' -f 2 | cut -d':' -f 1)
+  lando composer require $(cat web/modules/contrib/$MODULE_NAME/composer.json | jq -r '.["require-dev"] | to_entries | map(.key + ":" + .value) | join(" ")');
   # Only support doing one action at a time
   exit 0
 fi
