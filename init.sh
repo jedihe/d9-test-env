@@ -14,3 +14,8 @@ lando run-tests --types "PHPUnit-Unit" --module action
 echo "Running a Kernel test with phpunit..."
 echo "================================================"
 lando phpunit /app/web/core/modules/system/tests/src/Kernel/Action
+
+lando composer require drush/drush drupal/devel drupal/admin_toolbar $1
+
+[[ -n $1 ]] &&
+  ./utils.sh --add-require-dev $1
