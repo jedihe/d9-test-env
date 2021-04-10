@@ -8,7 +8,7 @@ Lando-powered environment for running and developing Drupal 9 tests
 3. Edit init.sh, set the desired Drupal core branch to checkout, e.g. "9.2.x", save.
 4. Run:
 ```
-./init.sh
+./init.sh drupal/some_module:1.x-dev
 ```
 5. To get the url for the local site, run:
 ```
