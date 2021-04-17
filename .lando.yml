@@ -20,6 +20,10 @@ tooling:
     service: appserver
     description: Runs phpunit
     cmd: /app/web/vendor/bin/phpunit -c /app/web/core/
+  commit-code-check:
+    service: appserver
+    cmd: bash /app/web/core/scripts/dev/commit-code-check.sh
+    dir: /app/web
 services:
   appserver:
     type: php
